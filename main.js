@@ -16,6 +16,9 @@ const rockButton = document.querySelector("#rock-button");
 const paperButton = document.querySelector("#paper-button");
 const scissorsButton = document.querySelector("#scissors-button");
 const message = document.querySelector("#message");
+const countdown = document.querySelector("#countdown");
+const result = document.querySelector("#result");
+
 
 rockButton.addEventListener("click", () => {
     playOption(Choices.ROCK)
@@ -53,30 +56,32 @@ function playOption(playerSelection) {
     if (state.isEnded) return;
 
     const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection); 
-    console.log(result);
+    
+    const roundResult = playRound(playerSelection, computerSelection); 
 
-    if (result === 1) {
+    if (roundResult === 1) {
         message.textContent = "You get a point!";
         state.playerScore++;
         playerScore.textContent = state.playerScore.toString();
         if (state.playerScore === 5) {
-            message.textContent = "You wins!";
+            result.textContent = "You wins!";
+            result.style.display = "block";
             state.isEnded = true;
         }
     }
 
-    if (result === -1) {
+    if (roundResult === -1) {
         message.textContent = "Computer gets a point!";
         state.computerScore++;
         computerScore.textContent = state.computerScore.toString();
         if (state.computerScore === 5) {
-            message.textContent = "Computer wins!";
+            result.textContent = "Computer wins!";
+            result.style.display = "block";
             state.isEnded = true;
         }
     }
 
-    if (result === 0) {
+    if (roundResult === 0) {
         message.textContent = "Ties!";
     }
 }

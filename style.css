@@ -68,11 +68,11 @@ textarea:not([rows]) {
 }
 
 * {
-  --primary: #000;
-  --secondary: #fff;
-  --accent: #f00;
-  --background: #fff;
-  --text: #000;
+  --primary: rgb(229, 252, 245);
+  --secondary: rgb(179, 222, 193);
+  --accent: rgb(117, 13, 55);
+  --background: rgb(254, 255, 254);
+  --text: rgb(33, 1, 36);
   
   --font: 'Roboto', sans-serif;
   --font-size: 1rem;
@@ -95,10 +95,17 @@ body {
   gap: 0.5rem;
 }
 
+.playground {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
 menu {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
@@ -110,7 +117,7 @@ button {
   border-radius: 0.25rem;
 
   & img {
-    max-width: 1rem;
+    max-width: 150px;
   }
 }
 
@@ -125,4 +132,8 @@ button:hover {
 
 .restart {
   margin-right: auto;
+}
+
+#result {
+  display: none;
 }
