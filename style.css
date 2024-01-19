@@ -67,20 +67,27 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
+/* Remove button styling */
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 * {
   margin: 0;
   padding: 0;
 
-  --primary: rgb(229, 252, 245);
-  --secondary: rgb(179, 222, 193);
-  --accent: rgb(117, 13, 55);
-  --background: rgb(254, 255, 254);
-  --text: rgb(33, 1, 36);
+  --primary: white;
+  --secondary: lightgray;
+  --accent: black;
+  --background: white;
+  --text: black;
   
   --font: 'Roboto', sans-serif;
   --font-size: 1rem;
   --font-weight: 400;
 
+  /* border: red 1px solid; */
 }
 
 body {
@@ -89,8 +96,6 @@ body {
   font-family: var(--font);
   font-size: var(--font-size);
   font-weight: var(--font-weight);
-
-  border: red 1px solid;
 }
 
 .container {
@@ -118,21 +123,41 @@ body {
   align-items: center;
 }
 
+.info h1 {
+  margin-bottom: 1rem;
+}
+
+.score {
+  font-size: 4rem;
+}
+
 menu {
-  margin: 0;
-  padding: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-button {
-  all: unset;
-  cursor: pointer;
+.item {
+  width: 100%;
   border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
 
   & img {
     max-width: 150px;
   }
+}
+
+.option:hover {
+  border: 1px solid var(--accent);
+
+  & img {
+    transform: scale(1.1);
+  }
+}
+
+.computer .item {
+  transform: scaleX(-1);
 }
 
 .restart {
@@ -152,4 +177,17 @@ button {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+#result h1 {
+  margin-bottom: 1rem;
+}
+
+#result button {
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  font-size: 1.5rem;
+  border: 2px solid var(--accent);
+  background-color: var(--primary);
 }

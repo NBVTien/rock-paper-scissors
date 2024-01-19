@@ -1,3 +1,16 @@
+const playerScore = document.querySelector("#player-score");
+const computerScore = document.querySelector("#computer-score");
+const rockPlayer = document.querySelector("#rock-player");
+const paperPlayer = document.querySelector("#paper-player");
+const scissorsPlayer = document.querySelector("#scissors-player");
+const rockComputer = document.querySelector("#rock-computer");
+const paperComputer = document.querySelector("#paper-computer");
+const scissorsComputer = document.querySelector("#scissors-computer");
+const message = document.querySelector("#message");
+const countdown = document.querySelector("#countdown");
+const result = document.querySelector("#result");
+const resultMessage = document.querySelector("#result-message");
+
 const state = {
     playerScore: 0,
     computerScore: 0,
@@ -5,27 +18,20 @@ const state = {
 }
 
 const Choices = { ROCK: 'rock', PAPER: 'paper', SCISSORS: 'scissors' };
-
-const playerScore = document.querySelector("#player-score");
-const computerScore = document.querySelector("#computer-score");
-const rockButton = document.querySelector("#rock-button");
-const paperButton = document.querySelector("#paper-button");
-const scissorsButton = document.querySelector("#scissors-button");
-const message = document.querySelector("#message");
-const countdown = document.querySelector("#countdown");
-const result = document.querySelector("#result");
-const resultMessage = document.querySelector("#result-message");
+const redFilter = "invert(16%) sepia(84%) saturate(6313%) hue-rotate(358deg) brightness(103%) contrast(114%)";
+const greenFilter = "invert(32%) sepia(96%) saturate(6078%) hue-rotate(108deg) brightness(94%) contrast(103%)";
+const yellowFilter = "invert(87%) sepia(91%) saturate(4874%) hue-rotate(357deg) brightness(102%) contrast(104%)";
 
 
-rockButton.addEventListener("click", () => {
+rockPlayer.addEventListener("click", () => {
     playOption(Choices.ROCK)
 });
 
-paperButton.addEventListener("click", () => {
+paperPlayer.addEventListener("click", () => {
     playOption(Choices.PAPER)
 });
 
-scissorsButton.addEventListener("click", () => {
+scissorsPlayer.addEventListener("click", () => {
     playOption(Choices.SCISSORS)
 });
 
@@ -49,15 +55,31 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function colorReset() {
+    rockPlayer.querySelector("img").style.filter = "";
+    paperPlayer.querySelector("img").style.filter = "";
+    scissorsPlayer.querySelector("img").style.filter = "";
+    rockComputer.querySelector("img").style.filter = "";
+    paperComputer.querySelector("img").style.filter = "";
+    scissorsComputer.querySelector("img").style.filter = "";
+
+}
+
 function playOption(playerSelection) {
     if (state.isEnded) return;
 
+    const playerItem = document.querySelector(`#${playerSelection}-player`);
+
     const computerSelection = getComputerChoice();
+    const computerItem = document.querySelector(`#${computerSelection}-computer`);
     
     const roundResult = playRound(playerSelection, computerSelection); 
 
     if (roundResult === 1) {
-        message.textContent = "You get a point!";
+        colorReset();
+        playerItem.querySelector("img").style.filter = greenFilter;
+        computerItem.querySelector("img").style.filter = redFilter;
+
         state.playerScore++;
         playerScore.textContent = state.playerScore.toString();
         if (state.playerScore === 5) {
@@ -68,9 +90,13 @@ function playOption(playerSelection) {
     }
 
     if (roundResult === -1) {
-        message.textContent = "Computer gets a point!";
+        colorReset();
+        playerItem.querySelector("img").style.filter = redFilter;
+        computerItem.querySelector("img").style.filter = greenFilter;
+
         state.computerScore++;
         computerScore.textContent = state.computerScore.toString();
+
         if (state.computerScore === 5) {
             resultMessage.textContent = "Computer wins!";
             result.style.display = "flex";
@@ -79,6 +105,8 @@ function playOption(playerSelection) {
     }
 
     if (roundResult === 0) {
-        message.textContent = "Ties!";
+        colorReset();
+        playerItem.querySelector("img").style.filter = yellowFilter;
+        computerItem.querySelector("img").style.filter = yellowFilter;
     }
 }
